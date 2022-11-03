@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //app.set("views", path.join(__dirname, "views"));
 
 const octokit = new Octokit({
-  auth: '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'
+  auth: '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'
 });
 
 app.get('/', function(req, res) {
@@ -24,8 +24,9 @@ app.get('/', function(req, res) {
   });
 
 app.post('/', async (req,res) => {
-    console.log(req.body);
+    //console.log(req.body);
     let tmp=[];
+    let id=[];
     let owner1 = req.body.owner;
     let repo1 = req.body.repo;
     try {
@@ -36,16 +37,18 @@ app.post('/', async (req,res) => {
           page:j,
           per_page: 100,
       });
-        console.log(result.data.length);
+       //console.log(result.data.length);
         for(let i=0;i<result.data.length;i++){
-             console.log(result.data[i].title+" "+result.data[i].id);
+            // console.log(result.data[i].title+" "+result.data[i].id);
             tmp.push(result.data[i].title);
+            id.push(result.data[i].id);
         }
     }
     } catch (error) {
       console.log(`Error! Status: ${error.status}. Message: ${error.response.data.message}`)
     } 
-    res.render('index',{tmp:tmp,repo1:repo1});
+    res.render('index',{tmp:tmp,repo1:repo1,owner1:owner1,id:id});
 });
 
 app.listen(3000, () => console.log('Example app listening on port 3000!'));
+
