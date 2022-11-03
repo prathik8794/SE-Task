@@ -30,7 +30,7 @@ app.post('/', async (req,res) => {
     let owner1 = req.body.owner;
     let repo1 = req.body.repo;
     try {
-      for(let j=1;j<=1;j++){
+      for(let j=1;j<=10;j++){
       const result = await octokit.request("GET /repos/{owner}/{repo}/pulls", {
           owner: owner1,
           repo: repo1,
